@@ -8,6 +8,7 @@ namespace Game_Tracker.Models
 {
     public class GameSystem
     {
+        [Key]
         public int Id { get; set; }
 
         [Required]
