@@ -7,5 +7,6 @@ namespace Game_Tracker.Models
 {
     public class Game
     {
+
     }
 }
