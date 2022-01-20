@@ -172,6 +172,7 @@
     <Compile Include="DisplayModels\GameDetail.cs" />
     <Compile Include="DisplayModels\GameEdit.cs" />
     <Compile Include="DisplayModels\GameListItem.cs" />
+    <Compile Include="DisplayModels\GameListTitles.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
