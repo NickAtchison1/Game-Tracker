@@ -15,6 +15,32 @@ namespace Game_Tracker.Controllers
     public class GameController : ApiController
     {
         private readonly ApplicationDBContext _context = new ApplicationDBContext();
+
+        public async Task<IHttpActionResult> GetAllGamesByWordInTitle(string word)
+        {
+            List<Game> games = await _context.Games.ToListAsync();
+
+            List<GameListItem> list = games.Select(
+                g => new GameListItem()
+                {
+                    Title = g.Title,
+                    Genre = g.Genre,
+                    StarRating = g.StarRating
+                }
+            ).ToList();
+
+            foreach (GameListItem game in list)
+            {
+                if (game.Title.Contains(word))
+                {
+                    return Ok(game);
+                }
+            }
+
+            return BadRequest();
+        }
+
+
         public async Task<IHttpActionResult> GetAllGamesAboveStarRating([FromUri]int starRating)
         {
             List<Game> games = await _context.Games.ToListAsync();
@@ -30,7 +56,7 @@ namespace Game_Tracker.Controllers
 
             foreach (GameListItem game in list)
             {
-                if (game.StarRating > starRating)
+                if (game.StarRating >= starRating)
                 {
                     return Ok(game);
                 }
@@ -38,7 +64,6 @@ namespace Game_Tracker.Controllers
 
             return BadRequest();
         }
-        private readonly ApplicationDBContext _context = new ApplicationDBContext();
 
         [HttpGet]
         public async Task<IHttpActionResult> GetGamesAlphabetically()
@@ -46,11 +71,11 @@ namespace Game_Tracker.Controllers
             List<Game> games = await _context.Games.ToListAsync();
             List<GameListItem> gameList = games.Select(g => new GameListItem()
             {                
-                Name = g.Title
+                Title = g.Title
 
             }).ToList();
 
-            IEnumerable<GameListItem> result = gameList.OrderBy(g => g.Name).ToList();
+            IEnumerable<GameListItem> result = gameList.OrderBy(g => g.Title).ToList();
 
             return Ok(result);
 
