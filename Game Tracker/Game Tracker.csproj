@@ -167,6 +167,7 @@
     <Compile Include="Controllers\GenreController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="DataModels\ApplicationDBContext.cs" />
     <Compile Include="DisplayModels\GameCreate.cs" />
     <Compile Include="DisplayModels\GameDetail.cs" />
     <Compile Include="DisplayModels\GameEdit.cs" />
