@@ -15,6 +15,30 @@ namespace Game_Tracker.Controllers
     public class GameController : ApiController
     {
         private readonly ApplicationDBContext _context = new ApplicationDBContext();
+        public async Task<IHttpActionResult> GetAllGamesAboveStarRating([FromUri]int starRating)
+        {
+            List<Game> games = await _context.Games.ToListAsync();
+
+            List<GameListItem> list = games.Select(
+                g => new GameListItem()
+                {
+                    Title = g.Title,
+                    Genre = g.Genre,
+                    StarRating = g.StarRating
+                }
+            ).ToList();
+
+            foreach (GameListItem game in list)
+            {
+                if (game.StarRating > starRating)
+                {
+                    return Ok(game);
+                }
+            }
+
+            return BadRequest();
+        }
+        private readonly ApplicationDBContext _context = new ApplicationDBContext();
 
         [HttpGet]
         public async Task<IHttpActionResult> GetGamesAlphabetically()
