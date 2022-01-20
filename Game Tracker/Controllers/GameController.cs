@@ -17,21 +17,34 @@ namespace Game_Tracker.Controllers
         private readonly ApplicationDBContext _context = new ApplicationDBContext();
 
         [HttpPost]
-        public async Task<IHttpActionResult> CreateGameSystem(Genre model)
+        public async Task<IHttpActionResult> CreateGame(GameCreate model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            _context.Genres.Add(model);
+            Game game = new Game()
+            {
+                Title = model.Title,
+                ReleaseDate = model.ReleaseDate,
+                Publisher = model.Publisher,
+                ESRBRating = model.ESRBRating,
+                StarRating = model.StarRating,
+                GenreId = model.GenreId,
+                GameSystemId = model.GameSystemId,
+
+
+            };
+            _context.Games.Add(game);
             await _context.SaveChangesAsync();
             return Ok();
         }
 
+        [HttpGet]
         public async Task<IHttpActionResult> GetAllGames()
         {
             return Ok(await _context.Games.ToListAsync());
 
         }
-
-        public async Task<IHttpActionResult> GetAllGamesByWordInTitle(string word)
+        [HttpGet]
+        public async Task<IHttpActionResult> GetAllGamesByWordInTitle([FromUri] string word)
         {
             List<Game> games = await _context.Games.ToListAsync();
 
@@ -55,7 +68,7 @@ namespace Game_Tracker.Controllers
             return BadRequest();
         }
 
-
+        [HttpGet]
         public async Task<IHttpActionResult> GetAllGamesAboveStarRating([FromUri] int starRating)
         {
             List<Game> games = await _context.Games.ToListAsync();
@@ -88,13 +101,9 @@ namespace Game_Tracker.Controllers
             {
                 Title = g.Title
 
-            }).ToList();
+            }).OrderBy(g => g.Title).ToList();
 
-            IEnumerable<GameListItem> result = gameList.OrderBy(g => g.Title).ToList();
-
-            return Ok(result);
-
-
+            return Ok(gameList);
         }
 
         [HttpGet]
