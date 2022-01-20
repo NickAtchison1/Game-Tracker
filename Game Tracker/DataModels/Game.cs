@@ -22,6 +22,7 @@ namespace Game_Tracker.Models
         public string ReleaseDate { get; set; }
         public string Publisher { get; set; }
         public AgeRating ESRBRating { get; set; }
+        [Range(1,5)]
         public double StarRating { get; set; }
 
         [ForeignKey(nameof(Genre))]
