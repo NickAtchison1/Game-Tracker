@@ -90,14 +90,15 @@ namespace Game_Tracker.Controllers
             List<Game> games = await _context.Games.ToListAsync();
             List<GameListItem> gameList = games.Select(g => new GameListItem()
             {
-                Title = g.Title
+                Title = g.Title,
+                Genre = g.Genre,
+                GameSystem = g.GameSystem
 
             }).ToList();
 
             IEnumerable<GameListItem> result = gameList.OrderBy(g => g.Title).ToList();
 
             return Ok(result);
-
 
         }
 
