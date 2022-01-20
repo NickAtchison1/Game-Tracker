@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Data.Entity;
 
 namespace Game_Tracker.Controllers
 {
@@ -23,5 +24,10 @@ namespace Game_Tracker.Controllers
             return Ok();
         }
 
+        [HttpGet]
+        public async Task<IHttpActionResult> GetGenres()
+        {
+            return Ok(_context.Genres.ToListAsync());            
+        }
     }
 }

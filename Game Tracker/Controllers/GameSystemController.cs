@@ -7,12 +7,14 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Data.Entity;
 
 namespace Game_Tracker.Controllers
 {
     public class GameSystemController : ApiController
     {
         private readonly ApplicationDBContext _context = new ApplicationDBContext();
+
         [HttpPost]
         public async Task<IHttpActionResult> CreateGameSystem(GameSystem model)
         {
@@ -20,6 +22,12 @@ namespace Game_Tracker.Controllers
             _context.GameSystems.Add(model);
             await _context.SaveChangesAsync();
             return Ok();
+        }
+        
+        [HttpGet]
+        public async Task<IHttpActionResult> GetSystem()
+        {
+            return Ok(_context.GameSystems.ToListAsync());            
         }
     }
 }
