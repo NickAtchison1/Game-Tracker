@@ -38,12 +38,16 @@ namespace Game_Tracker.Controllers
         }
 
         [HttpGet]
+        [Route("api/GetAllGames")]
         public async Task<IHttpActionResult> GetAllGames()
         {
-            return Ok(await _context.Games.ToListAsync());
+            return Ok(await _context.Games.Select(g=> new GameListTitles { 
+            Title = g.Title,
+            }).ToListAsync());
 
         }
         [HttpGet]
+        [Route("api/GetAllGamesByWordInTitle/{word}")]
         public async Task<IHttpActionResult> GetAllGamesByWordInTitle([FromUri] string word)
         {
             List<Game> games = await _context.Games.ToListAsync();
@@ -59,16 +63,22 @@ namespace Game_Tracker.Controllers
 
             foreach (GameListItem game in list)
             {
-                if (game.Title.Contains(word))
+                if (game.Title.ToLower()  == word.ToLower())
                 {
                     return Ok(game);
                 }
             }
 
+            //if (game.Title.Contains(word))
+            //{
+            //    return Ok(game);
+            //}
+
             return BadRequest();
         }
 
         [HttpGet]
+        [Route("api/GetAllGamesAboveStarRating/{starRating:int}")]
         public async Task<IHttpActionResult> GetAllGamesAboveStarRating([FromUri] int starRating)
         {
             List<Game> games = await _context.Games.ToListAsync();
@@ -92,12 +102,12 @@ namespace Game_Tracker.Controllers
 
             return BadRequest();
         }
-
+        
         [HttpGet]
         public async Task<IHttpActionResult> GetGamesAlphabetically()
         {
             List<Game> games = await _context.Games.ToListAsync();
-            List<GameListItem> gameList = games.Select(g => new GameListItem()
+            List<GameListTitles> gameList = games.Select(g => new GameListTitles()
             {
                 Title = g.Title
 
@@ -105,7 +115,7 @@ namespace Game_Tracker.Controllers
 
             return Ok(gameList);
         }
-
+        /*
         [HttpGet]
         public async Task<IHttpActionResult> GetGamesByGameSystem([FromUri] int userInputId)
         {
@@ -126,6 +136,6 @@ namespace Game_Tracker.Controllers
                 }
             }
             return BadRequest();
-        }
+        }*/
     }
 }
