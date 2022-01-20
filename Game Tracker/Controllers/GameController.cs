@@ -25,7 +25,16 @@ namespace Game_Tracker.Controllers
             return Ok();
         }
 
+        [HttpGet]
+        public async Task<IHttpActionResult> GetAllGames()
+        {
+            return Ok(await _context.Games.ToListAsync());
 
+        }
+
+
+
+        [HttpGet]
         public async Task<IHttpActionResult> GetAllGamesByWordInTitle(string word)
         {
             List<Game> games = await _context.Games.ToListAsync();
