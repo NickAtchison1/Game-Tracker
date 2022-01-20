@@ -178,6 +178,11 @@
     <Compile Include="DataModels\Game.cs" />
     <Compile Include="DataModels\GameSystem.cs" />
     <Compile Include="DataModels\Genre.cs" />
+    <Compile Include="Migrations\202201201822207_initialCommit.cs" />
+    <Compile Include="Migrations\202201201822207_initialCommit.designer.cs">
+      <DependentUpon>202201201822207_initialCommit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -264,6 +269,11 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202201201822207_initialCommit.resx">
+      <DependentUpon>202201201822207_initialCommit.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
