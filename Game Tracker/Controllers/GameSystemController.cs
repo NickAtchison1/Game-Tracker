@@ -2,6 +2,7 @@
 using Game_Tracker.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -23,11 +24,11 @@ namespace Game_Tracker.Controllers
             await _context.SaveChangesAsync();
             return Ok();
         }
-        
+
         [HttpGet]
-        public async Task<IHttpActionResult> GetSystem()
+        public async Task<IHttpActionResult> GetAllGenres()
         {
-            return Ok(_context.GameSystems.ToListAsync());            
+            return Ok(await _context.GameSystems.ToListAsync());
         }
     }
 }

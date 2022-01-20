@@ -2,6 +2,7 @@
 using Game_Tracker.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -25,9 +26,9 @@ namespace Game_Tracker.Controllers
         }
 
         [HttpGet]
-        public async Task<IHttpActionResult> GetGenres()
+        public async Task<IHttpActionResult> GetAllGenres()
         {
-            return Ok(_context.Genres.ToListAsync());            
+            return Ok(await _context.Genres.ToListAsync());
         }
     }
 }
