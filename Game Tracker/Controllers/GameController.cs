@@ -38,5 +38,23 @@ namespace Game_Tracker.Controllers
 
             return BadRequest();
         }
+        private readonly ApplicationDBContext _context = new ApplicationDBContext();
+
+        [HttpGet]
+        public async Task<IHttpActionResult> GetGamesAlphabetically()
+        {
+            List<Game> games = await _context.Games.ToListAsync();
+            List<GameListItem> gameList = games.Select(g => new GameListItem()
+            {                
+                Name = g.Title
+
+            }).ToList();
+
+            IEnumerable<GameListItem> result = gameList.OrderBy(g => g.Name).ToList();
+
+            return Ok(result);
+
+
+        }
     }
 }
