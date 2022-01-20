@@ -18,9 +18,12 @@ namespace Game_Tracker.Models
         }
         [Key]
         public int GameId { get; set; }
+           
         public string Title { get; set; }
+        
         public string ReleaseDate { get; set; }
         public string Publisher { get; set; }
+        
         public AgeRating ESRBRating { get; set; }
         [Range(1,5)]
         public double StarRating { get; set; }
