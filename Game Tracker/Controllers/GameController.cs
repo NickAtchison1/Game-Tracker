@@ -16,7 +16,27 @@ namespace Game_Tracker.Controllers
     {
         private readonly ApplicationDBContext _context = new ApplicationDBContext();
 
-        public async Task<IHttpActionResult> GetAllGamesByWordInTitle(string word)
+        [HttpPost]
+        public async Task<IHttpActionResult> CreateGame(GameCreate model)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            Game game = new Game()
+            {
+                Title = model.Title,
+                ReleaseDate = model.ReleaseDate,
+                Publisher = model.Publisher,
+                ESRBRating = model.ESRBRating,
+                StarRating = model.StarRating,
+                GenreId = model.GenreId,
+                GameSystemId = model.GameSystemId,
+
+
+            };
+            _context.Games.Add(game);
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+            public async Task<IHttpActionResult> GetAllGamesByWordInTitle(string word)
         {
             List<Game> games = await _context.Games.ToListAsync();
 
