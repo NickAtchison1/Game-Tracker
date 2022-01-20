@@ -25,6 +25,11 @@ namespace Game_Tracker.Controllers
             return Ok();
         }
 
+        public async Task<IHttpActionResult> GetAllGames()
+        {
+            return Ok(await _context.Games.ToListAsync());
+
+        }
 
         public async Task<IHttpActionResult> GetAllGamesByWordInTitle(string word)
         {
