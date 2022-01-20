@@ -56,7 +56,7 @@ namespace Game_Tracker.Controllers
 
             foreach (GameListItem game in list)
             {
-                if (game.StarRating > starRating)
+                if (game.StarRating >= starRating)
                 {
                     return Ok(game);
                 }
