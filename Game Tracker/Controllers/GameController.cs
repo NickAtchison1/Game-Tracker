@@ -41,7 +41,7 @@ namespace Game_Tracker.Controllers
         }
 
 
-        public async Task<IHttpActionResult> GetAllGamesAboveStarRating([FromUri]int starRating)
+        public async Task<IHttpActionResult> GetAllGamesAboveStarRating([FromUri] int starRating)
         {
             List<Game> games = await _context.Games.ToListAsync();
 
@@ -70,7 +70,7 @@ namespace Game_Tracker.Controllers
         {
             List<Game> games = await _context.Games.ToListAsync();
             List<GameListItem> gameList = games.Select(g => new GameListItem()
-            {                
+            {
                 Title = g.Title
 
             }).ToList();
@@ -80,6 +80,28 @@ namespace Game_Tracker.Controllers
             return Ok(result);
 
 
+        }
+
+        [HttpGet]
+        public async Task<IHttpActionResult> GetGamesByGameSystem([FromUri] int userInputId)
+        {
+            List<Game> gamesByGameSystem = await _context.Games.ToListAsync();
+            List<GameListItem> gamesByGameSystemList = gamesByGameSystem.Select(r => new GameListItem()
+            {
+                GameSystem = r.GameSystem.Name,
+                GameId = r.GameId,
+                Title = r.Title,
+                Genre = r.Genre,
+            }).ToList();
+
+            foreach (GameListItem game in gamesByGameSystemList)
+            {
+                if (game.GameSystemId == userInputId)
+                {
+                    return Ok(game);
+                }
+            }
+            return BadRequest();
         }
     }
 }
