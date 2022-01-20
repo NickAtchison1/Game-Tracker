@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Game_Tracker.DataModels;
+using Game_Tracker.DisplayModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,5 +11,6 @@ namespace Game_Tracker.Controllers
 {
     public class GameController : ApiController
     {
+        
     }
 }
