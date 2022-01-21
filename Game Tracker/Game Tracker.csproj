@@ -169,7 +169,6 @@
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DataModels\ApplicationDBContext.cs" />
     <Compile Include="DisplayModels\GameCreate.cs" />
-    <Compile Include="DisplayModels\GameEdit.cs" />
     <Compile Include="DisplayModels\GameListItem.cs" />
     <Compile Include="DisplayModels\GameListTitles.cs" />
     <Compile Include="DisplayModels\GamesAboveStarRatingList.cs" />
