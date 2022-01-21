@@ -62,28 +62,30 @@ namespace Game_Tracker.Controllers
                     Genre = g.Genre,
                     StarRating = g.StarRating
                 }
-            ).ToList();
+            ).Where(x => x.Title.ToLower().Contains(word.ToLower())).ToList();
 
-            foreach (GameListItem game in list)
-            {
-                if (game.Title.ToLower()  == word.ToLower())
-                {
-                    return Ok(game);
-                }
-            }
+          
+            return Ok(list);
 
-            //if (game.Title.Contains(word))
+         
+
+
+            //foreach (GameListItem game in list)
             //{
-            //    return Ok(game);
+            //    if (game.Title.ToLower().Contains(word.ToLower()))
+            //    {
+            //        return Ok(game);
+            //    }
             //}
-
-            return BadRequest();
+        
+            //return BadRequest();
         }
 
         [HttpGet]
         [Route("api/GetAllGamesAboveStarRating/{starRating:int}")]
         public async Task<IHttpActionResult> GetAllGamesAboveStarRating([FromUri] int starRating)
         {
+            //double starRating1 = Convert.ToDouble(starRating);
             List<Game> games = await _context.Games.ToListAsync();
 
             List<GameListItem> list = games.Select(
@@ -93,20 +95,22 @@ namespace Game_Tracker.Controllers
                     Genre = g.Genre,
                     StarRating = g.StarRating
                 }
-            ).ToList();
+            ).Where(x => x.StarRating >= starRating).ToList();
+            return Ok(list);
 
-            foreach (GameListItem game in list)
-            {
-                if (game.StarRating >= starRating)
-                {
-                    return Ok(game);
-                }
-            }
+            //foreach (GameListItem game in list)
+            //{
+            //    if (game.StarRating >= starRating)
+            //    {
+            //        return Ok(game);
+            //    }
+            //}
 
-            return BadRequest();
+            //return BadRequest();
         }
-        
+
         [HttpGet]
+        [Route("api/GetGamesAlphabetically")]
         public async Task<IHttpActionResult> GetGamesAlphabetically()
         {
             List<Game> games = await _context.Games.ToListAsync();
@@ -119,27 +123,29 @@ namespace Game_Tracker.Controllers
             return Ok(gameList);
         }
 
-        /*
         [HttpGet]
+        [Route("api/GetGamesByGameSystem/{userInputId:int}")]
         public async Task<IHttpActionResult> GetGamesByGameSystem([FromUri] int userInputId)
         {
             List<Game> gamesByGameSystem = await _context.Games.ToListAsync();
             List<GameListItem> gamesByGameSystemList = gamesByGameSystem.Select(r => new GameListItem()
             {
+                GameSystemId = r.GameSystemId,
                 GameSystem = r.GameSystem.Name,
                 GameId = r.GameId,
                 Title = r.Title,
                 Genre = r.Genre,
-            }).ToList();
+            }).Where(x => x.GameSystemId == userInputId).ToList();
+            return Ok(gamesByGameSystemList);
 
-            foreach (GameListItem game in gamesByGameSystemList)
-            {
-                if (game.GameSystemId == userInputId)
-                {
-                    return Ok(game);
-                }
-            }
-            return BadRequest();
-        }*/
+            //foreach (GameListItem game in gamesByGameSystemList)
+            //{
+            //    if (game.GameSystemId == userInputId)
+            //    {
+            //        return Ok(game);
+            //    }
+            //}
+            //return BadRequest();
+        }
     }
 }
