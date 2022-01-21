@@ -15,7 +15,9 @@ namespace Game_Tracker.DisplayModels
         public double StarRating { get; set; }
 
         public string Title { get; set; }
-        public string GameSystem { get; set; }
+
+        public GameSystem GameSystem { get; set; }
+
         public int GameSystemId { get; set; }
     }
 }
