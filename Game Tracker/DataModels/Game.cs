@@ -26,7 +26,7 @@ namespace Game_Tracker.Models
         
         public AgeRating ESRBRating { get; set; }
         [Range(1,5)]
-        public int StarRating { get; set; }
+        public double StarRating { get; set; }
 
         [ForeignKey(nameof(Genre))]
         public int GenreId { get; set; }
