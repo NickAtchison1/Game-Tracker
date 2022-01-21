@@ -112,9 +112,7 @@ namespace Game_Tracker.Controllers
             List<Game> games = await _context.Games.ToListAsync();
             List<GameListTitles> gameList = games.Select(g => new GameListTitles()
             {
-                Title = g.Title,
-                Genre = g.Genre,
-                GameSystem = g.GameSystem
+                Title = g.Title,                
 
             }).OrderBy(g => g.Title).ToList();
 
