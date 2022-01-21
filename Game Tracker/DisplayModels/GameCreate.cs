@@ -19,7 +19,7 @@ namespace Game_Tracker.DisplayModels
         public string Publisher { get; set; }
         [Required]
         public AgeRating ESRBRating { get; set; }        
-        public double StarRating { get; set; }
+        public int StarRating { get; set; }
         public int GenreId { get; set; }
         public int GameSystemId { get; set; }
     }

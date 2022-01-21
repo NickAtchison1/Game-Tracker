@@ -41,8 +41,11 @@ namespace Game_Tracker.Controllers
         [Route("api/GetAllGames")]
         public async Task<IHttpActionResult> GetAllGames()
         {
-            return Ok(await _context.Games.Select(g=> new GameListTitles { 
+            return Ok(await _context.Games.Select(g=> new GetAllGamesDetails
+            { 
             Title = g.Title,
+                GameSystemName = g.GameSystem.Name, Rating = g.ESRBRating.ToString(), StarRating = g.StarRating
+
             }).ToListAsync());
 
         }
@@ -117,6 +120,7 @@ namespace Game_Tracker.Controllers
 
             return Ok(gameList);
         }
+
         /*
         [HttpGet]
         public async Task<IHttpActionResult> GetGamesByGameSystem([FromUri] int userInputId)
