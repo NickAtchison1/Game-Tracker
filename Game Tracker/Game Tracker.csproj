@@ -173,6 +173,11 @@
     <Compile Include="DataModels\Game.cs" />
     <Compile Include="DataModels\GameSystem.cs" />
     <Compile Include="DataModels\Genre.cs" />
+    <Compile Include="Migrations\202201201822207_initialCommit.cs" />
+    <Compile Include="Migrations\202201201822207_initialCommit.Designer.cs">
+      <DependentUpon>202201201822207_initialCommit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
