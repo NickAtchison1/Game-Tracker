@@ -43,8 +43,10 @@ namespace Game_Tracker.Controllers
         {
             return Ok(await _context.Games.Select(g=> new GetAllGamesDetails
             { 
-            Title = g.Title,
-                GameSystemName = g.GameSystem.Name, Rating = g.ESRBRating.ToString(), StarRating = g.StarRating
+                Title = g.Title,
+                GameSystemName = g.GameSystem.Name, 
+                Rating = g.ESRBRating.ToString(), 
+                StarRating = g.StarRating
 
             }).ToListAsync());
 
