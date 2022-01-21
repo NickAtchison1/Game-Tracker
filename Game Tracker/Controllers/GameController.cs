@@ -61,7 +61,7 @@ namespace Game_Tracker.Controllers
                 g => new GameListItem()
                 {
                     Title = g.Title,
-                    Genre = g.Genre,
+                    Genre = g.Genre.Name,
                     StarRating = g.StarRating
                 }
             ).Where(x => x.Title.ToLower().Contains(word.ToLower())).ToList();
@@ -70,45 +70,25 @@ namespace Game_Tracker.Controllers
             return Ok(list);
 
          
-
-
-            //foreach (GameListItem game in list)
-            //{
-            //    if (game.Title.ToLower().Contains(word.ToLower()))
-            //    {
-            //        return Ok(game);
-            //    }
-            //}
-        
-            //return BadRequest();
         }
 
         [HttpGet]
         [Route("api/GetAllGamesAboveStarRating/{starRating:int}")]
         public async Task<IHttpActionResult> GetAllGamesAboveStarRating([FromUri] int starRating)
         {
-            //double starRating1 = Convert.ToDouble(starRating);
+         
             List<Game> games = await _context.Games.ToListAsync();
 
             List<GameListItem> list = games.Select(
                 g => new GameListItem()
                 {
                     Title = g.Title,
-                    Genre = g.Genre,
                     StarRating = g.StarRating
                 }
             ).Where(x => x.StarRating >= starRating).ToList();
             return Ok(list);
 
-            //foreach (GameListItem game in list)
-            //{
-            //    if (game.StarRating >= starRating)
-            //    {
-            //        return Ok(game);
-            //    }
-            //}
-
-            //return BadRequest();
+         
         }
 
         [HttpGet]
@@ -136,18 +116,11 @@ namespace Game_Tracker.Controllers
                 GameSystem = r.GameSystem.Name,
                 GameId = r.GameId,
                 Title = r.Title,
-                Genre = r.Genre,
+                Genre = r.Genre.Name,
             }).Where(x => x.GameSystemId == userInputId).ToList();
             return Ok(gamesByGameSystemList);
 
-            //foreach (GameListItem game in gamesByGameSystemList)
-            //{
-            //    if (game.GameSystemId == userInputId)
-            //    {
-            //        return Ok(game);
-            //    }
-            //}
-            //return BadRequest();
+           
         }
     }
 }

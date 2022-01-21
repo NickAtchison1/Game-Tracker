@@ -5,13 +5,10 @@ using System.Web;
 
 namespace Game_Tracker.DisplayModels
 {
-    public class GetAllGamesDetails
+    public class GamesAboveStarRatingList
     {
         public string Title { get; set; }
-        public string GameSystemName { get; set; }
-        public string Rating { get; set; }
-
         public double StarRating { get; set; }
     }
-       
+
 }
